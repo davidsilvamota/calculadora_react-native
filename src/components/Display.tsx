@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Dimensions } from "react-native";
 
 export default function Display(props: any) {
   return (
@@ -13,8 +13,8 @@ export default function Display(props: any) {
 const styles = StyleSheet.create({
   containerDisplay: {
     backgroundColor: "gray",
-    height: 100,
     justifyContent: "center",
+    height:"30%",
     alignItems: "flex-end",
     padding: 10,
   },
