@@ -1,11 +1,12 @@
 import React from "react";
-import { Text, View, StyleSheet, Dimensions } from "react-native";
+import { Text, View, StyleSheet, Dimensions, TextInput } from "react-native";
 
 export default function Display(props: any) {
   return (
     <>
       <View style={styles.containerDisplay}>
-        <Text style={styles.txtDisplay}>{props.txtDisplay}</Text>
+        <TextInput style={styles.txtDisplay} value={props.value} onChangeText={props.onChangeText}></TextInput>
+        <Text style={styles.txtDisplay}>{props.res}</Text>
       </View>
     </>
   );
