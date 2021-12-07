@@ -3,26 +3,27 @@ import { StyleSheet, View } from "react-native";
 import Botao from "./src/components/Botao";
 import Display from "./src/components/Display";
 
+let inicio = {
+  valorTela : "0",
+  valorResultado : 0,
+  operado :false,
+}
 export default function App() {
-  let inicio = {
-    valorTela : "",
-    valorResultado : 0,
-    operado :false,
-    
-  }
-  const [displayValue, setDisplayValue] = useState(inicio.valorTela);
-  const [resultado,setResultado]= useState(inicio.valorResultado)
+  const [displayValue, setDisplayValue] = useState <any>(inicio.valorTela);
+  const [resultado,setResultado]= useState(0)
   
   const changeValor = (e: any)=>{
     setDisplayValue(e.target.value)
   }
 
   const addDigito = (n : string) => {
-    inicio.valorTela = inicio.valorTela+n
-    setDisplayValue(inicio.valorTela);
+    if(n == "0" && displayValue == "0" ){
+      return
+    }
+    setDisplayValue(displayValue+n);
   };
   const deleteDigito = () => {
-    setDisplayValue("0");
+    setDisplayValue(inicio.valorTela);
   };
 
   return (
