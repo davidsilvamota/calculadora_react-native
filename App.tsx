@@ -8,10 +8,6 @@ export default function App() {
   const [oldNum, setOldNum] = useState<any>(0);
   const [operador, setOperador] = useState<any>();
 
-  const ChangeValue = (e: number) => {
-    setNum(e);
-  };
-
   const addDigito = (n: number) => {
     num == 0 ? setNum(n) : setNum(num + n);
   };
@@ -23,7 +19,7 @@ export default function App() {
   const handleOperation = (e: number) => {
     setOldNum(num);
     setOperador(e);
-    setNum(0)
+    setNum(0);
   };
   const calculate = () => {
     if (operador === "/") {
@@ -43,7 +39,7 @@ export default function App() {
   return (
     <>
       <View style={styles.container}>
-        <Display onChangeText={ChangeValue} value={num}></Display>
+        <Display value={num}></Display>
         <View style={styles.calculadora}>
           <Botao label={"AC"} triple onPress={limpar}></Botao>
           <Botao label={"/"} operation onPress={handleOperation}></Botao>
@@ -70,7 +66,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
   },
   calculadora: {
     flexDirection: "row",

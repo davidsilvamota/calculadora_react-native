@@ -5,18 +5,18 @@ export default function Display(props: any) {
   return (
     <>
       <View style={styles.containerDisplay}>
-       <TextInput onChangeText={props.onChangeTexte} value={props.value} ></TextInput>
+       <Text style={styles.txtDisplay}>{props.value}</Text>
       </View>
     </>
   );
 }
 const styles = StyleSheet.create({
   containerDisplay: {
+    flex:1,
     backgroundColor: "gray",
     justifyContent: "center",
-    height:"30%",
     alignItems: "flex-end",
-    padding: 10,
+    paddingHorizontal:10
   },
   txtDisplay: {
     fontSize: 40,
