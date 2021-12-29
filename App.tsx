@@ -3,51 +3,65 @@ import { StyleSheet, View } from "react-native";
 import Botao from "./src/components/Botao";
 import Display from "./src/components/Display";
 
-let inicio = {
-  valorTela : "0",
-  valorResultado : 0,
-  operado :false,
-}
 export default function App() {
-  const [displayValue, setDisplayValue] = useState <any>(inicio.valorTela);
-  const [resultado,setResultado]= useState(0)
-  
-  const changeValor = (e: any)=>{
-    setDisplayValue(e.target.value)
-  }
+  const [num, setNum] = useState<any>(0);
+  const [oldNum, setOldNum] = useState<any>(0);
+  const [operador, setOperador] = useState<any>();
 
-  const addDigito = (n : string) => {
-    if(n == "0" && displayValue == "0" ){
-      return
-    }
-    setDisplayValue(displayValue+n);
+  const ChangeValue = (e: number) => {
+    setNum(e);
   };
-  const deleteDigito = () => {
-    setDisplayValue(inicio.valorTela);
+
+  const addDigito = (n: number) => {
+    num == 0 ? setNum(n) : setNum(num + n);
+  };
+
+  const limpar = () => {
+    setNum(0);
+  };
+
+  const handleOperation = (e: number) => {
+    setOldNum(num);
+    setOperador(e);
+    setNum(0)
+  };
+  const calculate = () => {
+    if (operador === "/") {
+      setNum(oldNum / num);
+    }
+    if (operador === "x") {
+      setNum(parseInt(oldNum) * parseInt(num));
+    }
+    if (operador === "+") {
+      setNum(parseInt(oldNum) + parseInt(num));
+    }
+    if (operador === "-") {
+      setNum(parseInt(oldNum) - parseInt(num));
+    }
   };
 
   return (
     <>
       <View style={styles.container}>
-        <Display value={displayValue} onChangeText={changeValor} res={resultado}></Display>
+        <Display onChangeText={ChangeValue} value={num}></Display>
         <View style={styles.calculadora}>
-          <Botao label={"AC"} triple onPress={deleteDigito}></Botao>
-          <Botao label={"÷"} operation></Botao>
+          <Botao label={"AC"} triple onPress={limpar}></Botao>
+          <Botao label={"/"} operation onPress={handleOperation}></Botao>
           <Botao label={"7"} onPress={addDigito}></Botao>
           <Botao label={"8"} onPress={addDigito}></Botao>
           <Botao label={"9"} onPress={addDigito}></Botao>
-          <Botao label={"×"} operation></Botao>
+          <Botao label={"x"} operation onPress={handleOperation}></Botao>
           <Botao label={"4"} onPress={addDigito}></Botao>
           <Botao label={"5"} onPress={addDigito}></Botao>
           <Botao label={"6"} onPress={addDigito}></Botao>
-          <Botao label={"+"} operation></Botao>
+          <Botao label={"+"} operation onPress={handleOperation}></Botao>
           <Botao label={"1"} onPress={addDigito}></Botao>
           <Botao label={"2"} onPress={addDigito}></Botao>
           <Botao label={"3"} onPress={addDigito}></Botao>
-          <Botao label={"-"} operation></Botao>
+          <Botao label={"-"} operation onPress={handleOperation}></Botao>
           <Botao label={"0"} double onPress={addDigito}></Botao>
-          <Botao label={"."}onPress={addDigito}></Botao>
-          <Botao label={"="} operation></Botao>
+          <Botao label={"."} onPress={addDigito}></Botao>
+          <Botao label={"="} operation onPress={calculate}></Botao>
         </View>
       </View>
     </>
